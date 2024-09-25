@@ -14,15 +14,15 @@
                 <div class="card-body">
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
-                        <input type="text" name="title" id="title" class="form-control" placeholder="Title">
+                        <input type="text" value="{{ old('title') }}" name="title" id="title" class="form-control" placeholder="Title">
                     </div>
                     <div class="mb-3">
                         <label for="desc" class="form-label">Desc</label>
-                        <textarea name="desc" id="desc" cols="30" rows="5" class="form-control" placeholder="Desc"></textarea>
+                        <textarea name="desc" id="desc" cols="30" rows="5" class="form-control" placeholder="Desc">{{ old('desc') }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <textarea name="description" id="description" cols="30" rows="15" class="form-control" placeholder="Description"></textarea>
+                        <textarea name="description" id="description" cols="30" rows="15" class="form-control" placeholder="Description">{{ old('description') }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Image</label>
@@ -30,7 +30,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="author" class="form-label">Author</label>
-                        <input type="text" name="author" id="author" class="form-control" placeholder="Author">
+                        <input type="text" value="{{ old('author') }}" name="author" id="author" class="form-control" placeholder="Author">
                     </div>
                     <button type="submit" class="btn btn-dark text-uppercase"><b>Update</b></button>
                 </div>

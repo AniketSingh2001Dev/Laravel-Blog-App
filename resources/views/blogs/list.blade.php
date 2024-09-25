@@ -20,7 +20,7 @@
                                 <div class="d-flex align-items-center justify-content-between">
                                     <a href="{{ route('blogs.show', $blog->id) }}" class="btn btn-dark text-uppercase"><b>Details</b></a>
                                     <div>
-                                        <a href="edit.html" class="text-dark px-2"><i class="fa-solid fa-pen"></i></a>
+                                        <a href="{{ route('blogs.edit', $blog->id) }}" class="text-dark px-2"><i class="fa-solid fa-pen"></i></a>
                                         <a href="delete.html" class="text-dark"><i class="fa-solid fa-trash-can"></i></a>
                                     </div>
                                 </div>
