@@ -76,11 +76,11 @@
                             $('#description').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
                         }
 
-                        if (err.image) {
-                            $('#image').addClass('is-invalid').siblings('p').addClass('invalid-feedback').html(err.image);
-                        } else {
-                            $('#image').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
-                        }
+                        // if (err.image) {
+                        //     $('#image').addClass('is-invalid').siblings('p').addClass('invalid-feedback').html(err.image);
+                        // } else {
+                        //     $('#image').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
+                        // }
 
                         if (err.author) {
                             $('#author').addClass('is-invalid').siblings('p').addClass('invalid-feedback').html(err.author);
@@ -91,7 +91,7 @@
                         $('#title').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
                         $('#desc').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
                         $('#description').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
-                        $('#image').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
+                        // $('#image').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
                         $('#author').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
                         window.location.href = "{{ route('blogs.index') }}";
                     }

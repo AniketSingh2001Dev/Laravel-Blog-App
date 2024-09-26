@@ -39,3 +39,63 @@
         </div>
     </div>
 @endsection
+
+@section('CustomJS')
+    <script>
+        $('#blogForm').submit(function (e) {
+            e.preventDefault();
+            $("button[type=submit]").prop('disabled', true);
+            $.ajax({
+                type: "PUT",
+                url: "{{ route('blogs.update', $blog->id) }}",
+                data: $('#blogForm').serializeArray(),
+                dataType: "json",
+                success: function (res) {
+                    $("button[type=submit]").prop('disabled', false);
+                    if (res.status == false) {
+                        var err = res.errors;
+                        if (err.title) {
+                            $('#title').addClass('is-invalid').siblings('p').addClass('invalid-feedback').html(err.title);
+                        } else {
+                            $('#title').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
+                        }
+
+                        if (err.desc) {
+                            $('#desc').addClass('is-invalid').siblings('p').addClass('invalid-feedback').html(err.desc);
+                        } else {
+                            $('#desc').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
+                        }
+
+                        if (err.description) {
+                            $('#description').addClass('is-invalid').siblings('p').addClass('invalid-feedback').html(err.description);
+                        } else {
+                            $('#description').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
+                        }
+
+                        // if (err.image) {
+                        //     $('#image').addClass('is-invalid').siblings('p').addClass('invalid-feedback').html(err.image);
+                        // } else {
+                        //     $('#image').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
+                        // }
+
+                        if (err.author) {
+                            $('#author').addClass('is-invalid').siblings('p').addClass('invalid-feedback').html(err.author);
+                        } else {
+                            $('#author').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
+                        }
+                    } else {
+                        $('#title').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
+                        $('#desc').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
+                        $('#description').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
+                        // $('#image').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
+                        $('#author').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
+                        window.location.href = "{{ route('blogs.index') }}";
+                    }
+                },
+                error: function (jqXHR, exception) {
+                    console.log('Something Went Wrong!')
+                },
+            });
+        });
+    </script>
+@endsection
