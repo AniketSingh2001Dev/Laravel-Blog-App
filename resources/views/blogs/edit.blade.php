@@ -14,23 +14,23 @@
                 @csrf
                 <div class="card-body">
                     <div class="mb-3">
-                        <label for="title" class="form-label">Title</label>
+                        <label for="title" class="form-label fw-semibold">Title</label>
                         <input type="text" value="{{ $blog->title }}" name="title" id="title" class="form-control" placeholder="Title">
                     </div>
                     <div class="mb-3">
-                        <label for="desc" class="form-label">Desc</label>
-                        <textarea name="desc" id="desc" cols="30" rows="5" class="form-control" placeholder="Desc">{{ $blog->desc }}</textarea>
+                        <label for="desc" class="form-label fw-semibold">Desc</label>
+                        <textarea name="desc" id="desc" cols="30" rows="3" class="form-control" placeholder="Desc">{{ $blog->desc }}</textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea name="description" id="description" cols="30" rows="15" class="form-control" placeholder="Description">{{ $blog->description }}</textarea>
+                        <label for="description" class="form-label fw-semibold">Description</label>
+                        <textarea name="description" id="description" cols="30" rows="7" class="form-control" placeholder="Description">{{ $blog->description }}</textarea>
                     </div>
                     {{-- <div class="mb-3">
-                        <label for="image" class="form-label">Image</label>
+                        <label for="image" class="form-label fw-semibold">Image</label>
                         <input type="file" name="image" id="image" class="form-control" placeholder="Image">
                     </div> --}}
                     <div class="mb-3">
-                        <label for="author" class="form-label">Author</label>
+                        <label for="author" class="form-label fw-semibold">Author</label>
                         <input type="text" value="{{ $blog->author }}" name="author" id="author" class="form-control" placeholder="Author">
                     </div>
                     <button type="submit" class="btn btn-dark text-uppercase"><b>Update</b></button>

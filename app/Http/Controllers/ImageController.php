@@ -30,6 +30,7 @@ class ImageController extends Controller
     //         return response()->json([
     //             'status' => true,
     //             'message' => 'Image Uploaded Successfully.',
+    //             'image_id' => $img->id,
     //         ]);
     //     } else {
     //         return response()->json([

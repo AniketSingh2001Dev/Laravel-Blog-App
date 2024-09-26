@@ -13,27 +13,28 @@
                 @csrf
                 <div class="card-body">
                     <div class="mb-3">
-                        <label for="title" class="form-label">Title</label>
+                        <label for="title" class="form-label fw-semibold">Title</label>
                         <input type="text" name="title" id="title" class="form-control" placeholder="Title">
                         <p></p>
                     </div>
                     <div class="mb-3">
-                        <label for="desc" class="form-label">Desc</label>
-                        <textarea name="desc" id="desc" cols="30" rows="5" class="form-control" placeholder="Desc"></textarea>
+                        <label for="desc" class="form-label fw-semibold">Desc</label>
+                        <textarea name="desc" id="desc" cols="30" rows="3" class="form-control" placeholder="Desc"></textarea>
                         <p></p>
                     </div>
                     <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea name="description" id="description" cols="30" rows="15" class="form-control" placeholder="Description"></textarea>
+                        <label for="description" class="form-label fw-semibold">Description</label>
+                        <textarea name="description" id="description" cols="30" rows="7" class="form-control" placeholder="Description"></textarea>
                         <p></p>
                     </div>
                     {{-- <div class="mb-3">
-                        <label for="image" class="form-label">Image</label>
+                        <input type="hidden" name="image_id" id="image_id">
+                        <label for="image" class="form-label fw-semibold">Image</label>
                         <input type="file" name="image" id="image" class="form-control" placeholder="Image">
                         <p></p>
                     </div> --}}
                     <div class="mb-3">
-                        <label for="author" class="form-label">Author</label>
+                        <label for="author" class="form-label fw-semibold">Author</label>
                         <input type="text" name="author" id="author" class="form-control" placeholder="Author">
                         <p></p>
                     </div>
@@ -77,11 +78,11 @@
                             $('#description').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
                         }
 
-                        // if (err.image) {
-                        //     $('#image').addClass('is-invalid').siblings('p').addClass('invalid-feedback').html(err.image);
-                        // } else {
-                        //     $('#image').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
-                        // }
+                        if (err.image) {
+                            $('#image').addClass('is-invalid').siblings('p').addClass('invalid-feedback').html(err.image);
+                        } else {
+                            $('#image').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
+                        }
 
                         if (err.author) {
                             $('#author').addClass('is-invalid').siblings('p').addClass('invalid-feedback').html(err.author);
