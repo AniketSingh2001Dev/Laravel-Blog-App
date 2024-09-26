@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="card border-0 shadow-lg">
-            <form action="{{ route('blogs.store') }}" method="POST" name="blogForm" id="blogForm">
+            <form action="{{ route('blogs.store') }}" method="POST" name="blogForm" id="blogForm" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
                     <div class="mb-3">
@@ -27,12 +27,11 @@
                         <textarea name="description" id="description" cols="30" rows="7" class="form-control" placeholder="Description"></textarea>
                         <p></p>
                     </div>
-                    {{-- <div class="mb-3">
-                        <input type="hidden" name="image_id" id="image_id">
+                    <div class="mb-3">
                         <label for="image" class="form-label fw-semibold">Image</label>
                         <input type="file" name="image" id="image" class="form-control" placeholder="Image">
                         <p></p>
-                    </div> --}}
+                    </div>
                     <div class="mb-3">
                         <label for="author" class="form-label fw-semibold">Author</label>
                         <input type="text" name="author" id="author" class="form-control" placeholder="Author">
@@ -93,7 +92,7 @@
                         $('#title').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
                         $('#desc').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
                         $('#description').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
-                        // $('#image').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
+                        $('#image').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
                         $('#author').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
                         window.location.href = "{{ route('blogs.index') }}";
                     }

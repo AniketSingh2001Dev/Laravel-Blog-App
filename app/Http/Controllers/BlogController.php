@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 // use Intervention\Image\ImageManager;
 // use Intervention\Image\Drivers\Gd\Driver;
@@ -40,7 +41,6 @@ class BlogController extends Controller
             'desc' => 'required',
             'description' => 'required',
             'author' => 'required',
-            'image_id' => 'nullable|exists:images,id',
         ];
         
         $validator = Validator::make($request->all(), $rules);
@@ -52,22 +52,6 @@ class BlogController extends Controller
             $blog->description = $request->description;
             $blog->author = $request->author;
             $blog->save();
-
-            // if ($request->image_id) {
-            //     $image = Image::find($request->image_id);
-            //     if ($image) {
-            //         $imgExtArr = explode('.', $image->name);
-            //         $ext = last($imgExtArr);
-            //         $imageName = $blog->id . '-' . time() . '.' . $ext;
-                    
-            //         $srcPath = public_path('/uploads/img/' . $image->name);
-            //         $destPath = public_path('/uploads/blogs/' . $imageName);
-            //         File::copy($srcPath, $destPath);
-                    
-            //         $blog->image = $imageName;
-            //         $blog->save();
-            //     }
-            // }
 
             $request->session()->flash('success', 'Blog Created Successfully.');
 
@@ -119,21 +103,6 @@ class BlogController extends Controller
             $blog->description = $request->description;
             $blog->author = $request->author;
             $blog->save();
-
-            // $image = Image::find($request->image_id);
-
-            // if ($image != null) {
-            //     $imgExtArr = explode('.', $image->name);
-            //     $ext = last($imgExtArr);
-            //     $imageName = $blog->id . '-' . time() . '.' . $ext;
-
-            //     $blog->image = $imageName;
-            //     $blog->save();
-
-            //     $srcPath = public_path('/uploads/img/' . $image->name);
-            //     $destPath = public_path('/uploads/blogs/' . $imageName);
-            //     File::copy($srcPath, $destPath);
-            // }
 
             $request->session()->flash('success', 'Blog Updated Successfully.');
 
