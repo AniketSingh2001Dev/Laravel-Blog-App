@@ -48,14 +48,15 @@
     <script>
         $('#blogForm').submit(function (e) { 
             e.preventDefault();
-            $('button[type=submit]').prop(['disabled' => true]);
+            var element = $(this);
+            $('button[type=submit]').prop('disabled', true);
             $.ajax({
                 type: "POST",
                 url: "{{ route('blogs.store') }}",
-                data: $('#blogForm').serializeArray(),
+                data: element.serializeArray(),
                 dataType: "json",
                 success: function (res) {
-                    $('button[type=submit]').prop(['disabled' => false]);
+                    $('button[type=submit]').prop('disabled', false);
                     if (res.status == false) {
                         var err = res.errors;
                         if (err.title) {
