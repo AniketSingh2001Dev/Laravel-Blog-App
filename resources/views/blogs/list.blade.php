@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="container">
+        <div class="mt-3">
+            @include('alert.message')
+        </div>
         <div class="d-flex justify-content-between pt-5 mb-4">
             <h3 class="fs-2"><b>All Blogs</b></h3>
             <div>
@@ -28,6 +31,10 @@
                         </div>
                     </div>
                 @endforeach
+            @else
+                <div class="alert alert-secondary fs-3 text-center mt-5 text-capitalize fw-semibold" role="alert">
+                    Be the first person to post a blog!!
+                </div>
             @endif
         </div>
     </div>
