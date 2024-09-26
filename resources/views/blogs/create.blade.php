@@ -27,11 +27,11 @@
                         <textarea name="description" id="description" cols="30" rows="15" class="form-control" placeholder="Description"></textarea>
                         <p></p>
                     </div>
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="image" class="form-label">Image</label>
                         <input type="file" name="image" id="image" class="form-control" placeholder="Image">
                         <p></p>
-                    </div>
+                    </div> --}}
                     <div class="mb-3">
                         <label for="author" class="form-label">Author</label>
                         <input type="text" name="author" id="author" class="form-control" placeholder="Author">

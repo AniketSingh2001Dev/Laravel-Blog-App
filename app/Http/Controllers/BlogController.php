@@ -102,9 +102,51 @@ class BlogController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Blog $blog)
     {
-        //
+        $rules = [
+            'title' => 'required',
+            'desc' => 'required',
+            'description' => 'required',
+            'author' => 'required',
+        ];
+        
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->passes()) {
+            $blog->title = $request->title;
+            $blog->desc = $request->desc;
+            $blog->description = $request->description;
+            $blog->author = $request->author;
+            $blog->save();
+
+            // $image = Image::find($request->image_id);
+
+            // if ($image != null) {
+            //     $imgExtArr = explode('.', $image->name);
+            //     $ext = last($imgExtArr);
+            //     $imageName = $blog->id . '-' . time() . '.' . $ext;
+
+            //     $blog->image = $imageName;
+            //     $blog->save();
+
+            //     $srcPath = public_path('/uploads/img/' . $image->name);
+            //     $destPath = public_path('/uploads/blogs/' . $imageName);
+            //     File::copy($srcPath, $destPath);
+            // }
+
+            $request->session()->flash('success', 'Blog Updated Successfully.');
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Blog Updated Successfully.',
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'errors' => $validator->errors(),
+            ]);
+        }
     }
 
     /**

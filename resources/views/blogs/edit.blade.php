@@ -5,32 +5,33 @@
         <div class="d-flex justify-content-between pt-5 mb-4">
             <h3 class="fs-2"><b>Edit Blog</b></h3>
             <div>
-                <a href="#" class="btn btn-dark text-uppercase"><b>Back</b></a>
+                <a href="{{ route('blogs.index') }}" class="btn btn-dark text-uppercase"><b>Back</b></a>
             </div>
         </div>
         <div class="card border-0 shadow-lg">
-            <form action="store action" method="POST">
+            <form action="{{ route('blogs.update', $blog->id) }}" method="POST" name="blogForm" id="blogForm">
+                @method('PUT')
                 @csrf
                 <div class="card-body">
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
-                        <input type="text" value="{{ old('title') }}" name="title" id="title" class="form-control" placeholder="Title">
+                        <input type="text" value="{{ $blog->title }}" name="title" id="title" class="form-control" placeholder="Title">
                     </div>
                     <div class="mb-3">
                         <label for="desc" class="form-label">Desc</label>
-                        <textarea name="desc" id="desc" cols="30" rows="5" class="form-control" placeholder="Desc">{{ old('desc') }}</textarea>
+                        <textarea name="desc" id="desc" cols="30" rows="5" class="form-control" placeholder="Desc">{{ $blog->desc }}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <textarea name="description" id="description" cols="30" rows="15" class="form-control" placeholder="Description">{{ old('description') }}</textarea>
+                        <textarea name="description" id="description" cols="30" rows="15" class="form-control" placeholder="Description">{{ $blog->description }}</textarea>
                     </div>
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="image" class="form-label">Image</label>
                         <input type="file" name="image" id="image" class="form-control" placeholder="Image">
-                    </div>
+                    </div> --}}
                     <div class="mb-3">
                         <label for="author" class="form-label">Author</label>
-                        <input type="text" value="{{ old('author') }}" name="author" id="author" class="form-control" placeholder="Author">
+                        <input type="text" value="{{ $blog->author }}" name="author" id="author" class="form-control" placeholder="Author">
                     </div>
                     <button type="submit" class="btn btn-dark text-uppercase"><b>Update</b></button>
                 </div>
