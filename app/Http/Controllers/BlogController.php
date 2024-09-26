@@ -152,8 +152,15 @@ class BlogController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, Blog $blog)
     {
-        //
+        $blog->delete();
+        
+        $request->session()->flash('success', 'Blog Deleted Successfully.');
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Blog Deleted Successfully.',
+        ]);
     }
 }

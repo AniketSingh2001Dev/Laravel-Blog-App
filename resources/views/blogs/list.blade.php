@@ -21,7 +21,7 @@
                                     <a href="{{ route('blogs.show', $blog->id) }}" class="btn btn-dark text-uppercase"><b>Details</b></a>
                                     <div>
                                         <a href="{{ route('blogs.edit', $blog->id) }}" class="text-dark px-2"><i class="fa-solid fa-pen"></i></a>
-                                        <a href="delete.html" class="text-dark"><i class="fa-solid fa-trash-can"></i></a>
+                                        <a href="javascript:void(0)" onclick="deleteBlog({{ $blog->id }})" class="text-dark"><i class="fa-solid fa-trash-can"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -29,7 +29,31 @@
                     </div>
                 @endforeach
             @endif
-
         </div>
     </div>
+@endsection
+
+@section('CustomJS')
+    <script>
+        function deleteBlog(id) {
+            var url = "{{ route('blogs.destroy', 'ID') }}";
+            var newUrl = url.replace('ID', id);
+            if (confirm('Are you sure that you want to Delete This BLOG?')) {
+                $.ajax({
+                    type: "DELETE",
+                    url: newUrl,
+                    data: {},
+                    dataType: "json",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (res) {
+                        if (res.status) {
+                            window.location.href = "{{ route('blogs.index') }}";
+                        }
+                    }
+                });
+            }
+        }
+    </script>
 @endsection
