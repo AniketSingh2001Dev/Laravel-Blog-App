@@ -13,7 +13,11 @@
             <div class="col-md-12 fs-5">
                 <p>Posted by <b class="text-capitalize">{{ $blog->author }}</b> on <i>{{ \Carbon\Carbon::parse($blog->created_at)->format('l, jS F, Y') }}</i> at {{ \Carbon\Carbon::parse($blog->created_at)->format('h:i A T') }}</p>
             </div>
-            <img src="https://placehold.co/800x250" alt="image" width="800px" height="250px" class="img-fluid">
+            @if (!empty($blog->image))
+                <img src="{{ asset('uploads/blogs/' . $blog->image) }}" alt="image" width="800px" height="250px" class="img-fluid">
+            @else
+                <img src="https://placehold.co/800x250" alt="image" width="800px" height="250px" class="img-fluid">
+            @endif
             <p class="mt-3 fs-5">{{ $blog->description }}</p>
         </div>
 

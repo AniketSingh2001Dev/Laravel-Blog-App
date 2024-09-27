@@ -16,7 +16,11 @@
                 @foreach ($blogs as $blog)
                     <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
                         <div class="card border-0 shadow-lg">
-                            <img src="https://placehold.co/600x400" alt="thumbnail" width="600px" height="400px" class="card-img-top img-fluid">
+                            @if (!empty($blog->image))
+                                <img src="{{ asset('uploads/blogs/thumb/' . $blog->image) }}" alt="thumbnail" width="600px" height="400px" class="card-img-top img-fluid">
+                            @else
+                                <img src="https://placehold.co/600x400" alt="thumbnail" width="600px" height="400px" class="card-img-top img-fluid">
+                            @endif
                             <div class="card-body">
                                 <h4 class="card-title text-capitalize"><b>{{ $blog->title }}</b></h4>
                                 <p class="card-text">{{ $blog->desc }}</p>

@@ -9,7 +9,8 @@
             </div>
         </div>
         <div class="card border-0 shadow-lg">
-            <form action="{{ route('blogs.store') }}" method="POST" name="blogForm" id="blogForm" enctype="multipart/form-data">
+            <form action="{{ route('blogs.store') }}" method="POST" name="blogForm" id="blogForm"
+                enctype="multipart/form-data">
                 @csrf
                 <div class="card-body">
                     <div class="mb-3">
@@ -24,14 +25,15 @@
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label fw-semibold">Description</label>
-                        <textarea name="description" id="description" cols="30" rows="7" class="form-control" placeholder="Description"></textarea>
+                        <textarea name="description" id="description" cols="30" rows="7" class="form-control"
+                            placeholder="Description"></textarea>
                         <p></p>
                     </div>
-                    {{-- <div class="mb-3">
+                    <div class="mb-3">
+                        <input type="hidden" name="image_id" id="image_id">
                         <label for="image" class="form-label fw-semibold">Image</label>
                         <input type="file" name="image" id="image" class="form-control" placeholder="Image">
-                        <p></p>
-                    </div> --}}
+                    </div>
                     <div class="mb-3">
                         <label for="author" class="form-label fw-semibold">Author</label>
                         <input type="text" name="author" id="author" class="form-control" placeholder="Author">
@@ -46,7 +48,7 @@
 
 @section('CustomJS')
     <script>
-        $('#blogForm').submit(function (e) { 
+        $('#blogForm').submit(function(e) {
             e.preventDefault();
             var element = $(this);
             $('button[type=submit]').prop('disabled', true);
@@ -55,51 +57,85 @@
                 url: "{{ route('blogs.store') }}",
                 data: element.serializeArray(),
                 dataType: "json",
-                success: function (res) {
+                success: function(res) {
                     $('button[type=submit]').prop('disabled', false);
                     if (res.status == false) {
                         var err = res.errors;
                         if (err.title) {
-                            $('#title').addClass('is-invalid').siblings('p').addClass('invalid-feedback').html(err.title);
+                            $('#title').addClass('is-invalid').siblings('p').addClass(
+                                'invalid-feedback').html(err.title);
                         } else {
-                            $('#title').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
+                            $('#title').removeClass('is-invalid').siblings('p').removeClass(
+                                'invalid-feedback').html('');
                         }
 
                         if (err.desc) {
-                            $('#desc').addClass('is-invalid').siblings('p').addClass('invalid-feedback').html(err.desc);
+                            $('#desc').addClass('is-invalid').siblings('p').addClass('invalid-feedback')
+                                .html(err.desc);
                         } else {
-                            $('#desc').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
+                            $('#desc').removeClass('is-invalid').siblings('p').removeClass(
+                                'invalid-feedback').html('');
                         }
 
                         if (err.description) {
-                            $('#description').addClass('is-invalid').siblings('p').addClass('invalid-feedback').html(err.description);
+                            $('#description').addClass('is-invalid').siblings('p').addClass(
+                                'invalid-feedback').html(err.description);
                         } else {
-                            $('#description').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
+                            $('#description').removeClass('is-invalid').siblings('p').removeClass(
+                                'invalid-feedback').html('');
                         }
 
-                        // if (err.image) {
-                        //     $('#image').addClass('is-invalid').siblings('p').addClass('invalid-feedback').html(err.image);
-                        // } else {
-                        //     $('#image').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
-                        // }
-
                         if (err.author) {
-                            $('#author').addClass('is-invalid').siblings('p').addClass('invalid-feedback').html(err.author);
+                            $('#author').addClass('is-invalid').siblings('p').addClass(
+                                'invalid-feedback').html(err.author);
                         } else {
-                            $('#author').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
+                            $('#author').removeClass('is-invalid').siblings('p').removeClass(
+                                'invalid-feedback').html('');
                         }
                     } else {
                         $('#title').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
                         $('#desc').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
                         $('#description').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
-                        // $('#image').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
                         $('#author').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
                         window.location.href = "{{ route('blogs.index') }}";
                     }
                 },
-                error: function (jqXHR, exception) {
+                error: function(jqXHR, exception) {
                     console.log('Something Went Wrong!');
                 },
+            });
+        });
+
+        $(document).ready(function() {
+            $('#image').on('change', function() {
+                var formData = new FormData();
+                formData.append('image', this.files[0]);
+                $.ajax({
+                    url: "{{ route('images.create') }}",
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        $("#image_id").val(response.image_id);
+                        var html = `<div class="col-md-10">
+                                        <div class="card">
+                                            <input type="hidden" name="image_gallery_array[]" value="${response.image_id}">
+                                            <img src="${response.ImagePath}" class="card-img-top" alt="">
+                                            <div class="card-body">
+                                                <a href="#" class="btn btn-danger">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>`;
+                        $('#image-preview').html(html);
+                    },
+                    error: function(jqXHR, exception) {
+                        console.log('Something Went Wrong!');
+                    }
+                });
             });
         });
     </script>
