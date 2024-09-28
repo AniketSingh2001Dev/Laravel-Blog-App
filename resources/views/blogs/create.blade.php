@@ -119,12 +119,12 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    success: function(response) {
-                        $("#image_id").val(response.image_id);
+                    success: function(res) {
+                        $("#image_id").val(res.image_id);
                         var html = `<div class="col-md-10">
                                         <div class="card">
-                                            <input type="hidden" name="image_gallery_array[]" value="${response.image_id}">
-                                            <img src="${response.ImagePath}" class="card-img-top" alt="">
+                                            <input type="hidden" name="image_gallery_array[]" value="${res.image_id}">
+                                            <img src="${res.ImagePath}" class="card-img-top" alt="">
                                             <div class="card-body">
                                                 <a href="#" class="btn btn-danger">Delete</a>
                                             </div>

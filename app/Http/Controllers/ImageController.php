@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManager;
@@ -12,7 +13,7 @@ class ImageController extends Controller
     public function create(Request $request)
     {
         $image = $request->image;
-
+        
         if (!empty($image)) {
             $ext = $image->getClientOriginalExtension();
             $newName = time() . '.' . $ext;
@@ -33,7 +34,7 @@ class ImageController extends Controller
             return response()->json([
                 'status' => true,
                 'image_id' => $img->id,
-                'ImagePath' => asset('/uploads/thumb/' . $newName),
+                'ImagePath' => asset('/uploads/blogs/' . $newName),
                 'message' => 'Image Uploaded Successfully.',
             ]);
         }

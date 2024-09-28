@@ -14,7 +14,7 @@
                 <p>Posted by <b class="text-capitalize">{{ $blog->author }}</b> on <i>{{ \Carbon\Carbon::parse($blog->created_at)->format('l, jS F, Y') }}</i> at {{ \Carbon\Carbon::parse($blog->created_at)->format('h:i A T') }}</p>
             </div>
             @if (!empty($blog->image))
-                <img src="{{ asset('uploads/blogs/' . $blog->image) }}" alt="image" width="800px" height="250px" class="img-fluid">
+                <img src="{{ asset('uploads/blogs/main/' . $blog->image) }}" alt="image" width="800px" height="250px" class="img-fluid">
             @else
                 <img src="https://placehold.co/800x250" alt="image" width="800px" height="250px" class="img-fluid">
             @endif

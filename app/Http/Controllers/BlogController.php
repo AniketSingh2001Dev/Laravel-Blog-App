@@ -59,7 +59,7 @@ class BlogController extends Controller
 
                 $newImgName = $blog->id . '.' . $ext;
                 $srcPath = public_path() . '/uploads/img/' . $img->name;
-                $destPath = public_path() . '/uploads/blogs/' . $newImgName;
+                $destPath = public_path() . '/uploads/blogs/main/' . $newImgName;
                 File::copy($srcPath, $destPath);
 
                 $manager = new ImageManager(Driver::class);
@@ -91,7 +91,7 @@ class BlogController extends Controller
      * Display the specified resource.
      */
     public function show(Blog $blog)
-    {        
+    {                
         return view('blogs.show', compact('blog'));
     }
 
