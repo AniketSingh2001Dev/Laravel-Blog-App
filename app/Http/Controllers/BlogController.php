@@ -65,8 +65,14 @@ class BlogController extends Controller
                 $manager = new ImageManager(Driver::class);
                 $image = $manager->read($destPath);
                 
+                $mainImageSize = [800, 250];
+                $thumbImageSize = [600, 400];
+
+                $image->cover($mainImageSize[0], $mainImageSize[1]);
+                $image->save($destPath);
+                
                 $thumbPath = public_path() . '/uploads/blogs/thumb/' . $newImgName;
-                $image->cover(600, 400);
+                $image->cover($thumbImageSize[0], $thumbImageSize[1]);
                 $image->save($thumbPath);
 
                 $blog->image = $newImgName;
@@ -124,6 +130,38 @@ class BlogController extends Controller
             $blog->author = $request->author;
             $blog->save();
 
+            $oldImage = $blog->image;
+
+            if (!empty($request->image_id)) {
+                $img = Image::find($request->image_id);
+                $extArr = explode('.', $img->name);
+                $ext = last($extArr);
+
+                $newImgName = $blog->id . '-' . time() . '.' . $ext;
+                $srcPath = public_path() . '/uploads/img/' . $img->name;
+                $destPath = public_path() . '/uploads/blogs/main/' . $newImgName;
+                File::copy($srcPath, $destPath);
+
+                $manager = new ImageManager(Driver::class);
+                $image = $manager->read($destPath);
+                
+                $mainImageSize = [800, 250];
+                $thumbImageSize = [600, 400];
+
+                $image->cover($mainImageSize[0], $mainImageSize[1]);
+                $image->save($destPath);
+                
+                $thumbPath = public_path() . '/uploads/blogs/thumb/' . $newImgName;
+                $image->cover($thumbImageSize[0], $thumbImageSize[1]);
+                $image->save($thumbPath);
+
+                $blog->image = $newImgName;
+                $blog->save();
+
+                File::delete(public_path() . '/uploads/blogs/main/' . $oldImage);
+                File::delete(public_path() . '/uploads/blogs/thumb/' . $oldImage);
+            }
+
             $request->session()->flash('success', 'Blog Updated Successfully.');
 
             return response()->json([
@@ -143,6 +181,9 @@ class BlogController extends Controller
      */
     public function destroy(Request $request, Blog $blog)
     {
+        File::delete(public_path() . '/uploads/blogs/main/' . $blog->image);
+        File::delete(public_path() . '/uploads/blogs/thumb/' . $blog->image);
+
         $blog->delete();
         
         $request->session()->flash('success', 'Blog Deleted Successfully.');

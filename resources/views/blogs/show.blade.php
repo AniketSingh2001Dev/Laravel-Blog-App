@@ -18,7 +18,7 @@
             @else
                 <img src="https://placehold.co/800x250" alt="image" width="800px" height="250px" class="img-fluid">
             @endif
-            <p class="mt-3 fs-5">{{ $blog->description }}</p>
+            <p class="mt-3 fs-5">{!! $blog->description !!}</p>
         </div>
 
     </div>

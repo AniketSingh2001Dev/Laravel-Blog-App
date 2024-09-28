@@ -9,6 +9,8 @@
         <title>Blog</title>
         <link rel="stylesheet" href="{{ asset('assets/faicons/css/all.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/summernote/summernote.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/summernote/summernote-lite.min.css') }}">
     </head>
 
     <body>
@@ -20,6 +22,24 @@
         @yield('content')
         <script src="{{ asset('assets/jquery/js/jquery-3.7.1.min.js') }}"></script>
         <script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/summernote/summernote-lite.min.js') }}"></script>
+        <script>
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $(document).ready(function () {
+                $('.summernote').summernote({
+                    height: 300,
+                });
+
+                $('.summernote-mini').summernote({
+                    height: 120,
+                });
+            });
+        </script>
         @yield('CustomJS')
     </body>
 

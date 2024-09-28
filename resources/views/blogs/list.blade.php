@@ -23,7 +23,7 @@
                             @endif
                             <div class="card-body">
                                 <h4 class="card-title text-capitalize"><b>{{ $blog->title }}</b></h4>
-                                <p class="card-text">{{ $blog->desc }}</p>
+                                <p class="card-text">{{ Str::words($blog->desc, 20) }}</p>
                                 <div class="d-flex align-items-center justify-content-between">
                                     <a href="{{ route('blogs.show', $blog->id) }}" class="btn btn-dark text-uppercase"><b>Details</b></a>
                                     <div>

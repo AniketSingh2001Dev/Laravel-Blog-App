@@ -23,12 +23,13 @@
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label fw-semibold">Description</label>
-                        <textarea name="description" id="description" cols="30" rows="7" class="form-control" placeholder="Description">{{ $blog->description }}</textarea>
+                        <textarea name="description" id="description" cols="30" rows="7" class="summernote" placeholder="Description">{{ $blog->description }}</textarea>
                     </div>
-                    {{-- <div class="mb-3">
+                    <div class="mb-3">
+                        <input type="hidden" name="image_id" id="image_id">
                         <label for="image" class="form-label fw-semibold">Image</label>
-                        <input type="file" name="image" id="image" class="form-control" placeholder="Image">
-                    </div> --}}
+                        <input type="file" value="{{ $blog->image }}" name="image" id="image" class="form-control" placeholder="Image">
+                    </div>
                     <div class="mb-3">
                         <label for="author" class="form-label fw-semibold">Author</label>
                         <input type="text" value="{{ $blog->author }}" name="author" id="author" class="form-control" placeholder="Author">
@@ -72,12 +73,6 @@
                             $('#description').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
                         }
 
-                        // if (err.image) {
-                        //     $('#image').addClass('is-invalid').siblings('p').addClass('invalid-feedback').html(err.image);
-                        // } else {
-                        //     $('#image').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
-                        // }
-
                         if (err.author) {
                             $('#author').addClass('is-invalid').siblings('p').addClass('invalid-feedback').html(err.author);
                         } else {
@@ -87,7 +82,6 @@
                         $('#title').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
                         $('#desc').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
                         $('#description').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
-                        // $('#image').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
                         $('#author').removeClass('is-invalid').siblings('p').removeClass('invalid-feedback').html('');
                         window.location.href = "{{ route('blogs.index') }}";
                     }
@@ -95,6 +89,39 @@
                 error: function (jqXHR, exception) {
                     console.log('Something Went Wrong!')
                 },
+            });
+        });
+
+        $(document).ready(function() {
+            $('#image').on('change', function() {
+                var formData = new FormData();
+                formData.append('image', this.files[0]);
+                $.ajax({
+                    url: "{{ route('images.create') }}",
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(res) {
+                        $("#image_id").val(res.image_id);
+                        var html = `<div class="col-md-10">
+                                        <div class="card">
+                                            <input type="hidden" name="image_gallery_array[]" value="${res.image_id}">
+                                            <img src="${res.ImagePath}" class="card-img-top" alt="">
+                                            <div class="card-body">
+                                                <a href="#" class="btn btn-danger">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>`;
+                        $('#image-preview').html(html);
+                    },
+                    error: function(jqXHR, exception) {
+                        console.log('Something Went Wrong!');
+                    }
+                });
             });
         });
     </script>

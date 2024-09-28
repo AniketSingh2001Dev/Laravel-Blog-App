@@ -25,8 +25,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label fw-semibold">Description</label>
-                        <textarea name="description" id="description" cols="30" rows="7" class="form-control"
-                            placeholder="Description"></textarea>
+                        <textarea name="description" id="description" cols="30" rows="7" class="summernote" placeholder="Description"></textarea>
                         <p></p>
                     </div>
                     <div class="mb-3">

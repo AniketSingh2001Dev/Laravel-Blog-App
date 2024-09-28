@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManager;
@@ -25,7 +24,7 @@ class ImageController extends Controller
             $image->move(public_path() . '/uploads/img', $newName);
 
             $srcPath = public_path() . '/uploads/img/' . $newName;
-            $destPath = public_path() . '/uploads/blogs/' . $newName;
+            $destPath = public_path() . '/uploads/blogs/hidden/' . $newName;
             $manager = new ImageManager(Driver::class);
             $image = $manager->read($srcPath);
             $image->cover(800, 250);
@@ -34,7 +33,7 @@ class ImageController extends Controller
             return response()->json([
                 'status' => true,
                 'image_id' => $img->id,
-                'ImagePath' => asset('/uploads/blogs/' . $newName),
+                'ImagePath' => asset('/uploads/blogs/hidden/' . $newName),
                 'message' => 'Image Uploaded Successfully.',
             ]);
         }
