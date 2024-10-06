@@ -5,7 +5,7 @@
         <div class="d-flex justify-content-between pt-5 mb-4">
             <h3 class="fs-2"><b>Edit Blog</b></h3>
             <div>
-                <a href="{{ route('blogs.index') }}" class="btn btn-dark text-uppercase"><b>Back</b></a>
+                <a href="{{ route('blogs.index') }}" class="btn btn-dark text-uppercase fw-bold"><i class="fa-solid fa-angle-left"></i> Back</a>
             </div>
         </div>
         <div class="card border-0 shadow-lg">
@@ -34,7 +34,7 @@
                         <label for="author" class="form-label fw-semibold">Author</label>
                         <input type="text" value="{{ $blog->author }}" name="author" id="author" class="form-control" placeholder="Author">
                     </div>
-                    <button type="submit" class="btn btn-dark text-uppercase"><b>Update</b></button>
+                    <button type="submit" class="btn btn-dark text-uppercase fw-bold"><i class="fa-solid fa-wrench"></i> Update</button>
                 </div>
             </form>
         </div>

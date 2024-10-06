@@ -2,11 +2,10 @@
 
 @section('content')
     <div class="container">
-
         <div class="d-flex justify-content-between pt-5 mb-4">
             <h3 class="fs-1 text-capitalize"><b>{{ $blog->title }}</b></h3>
             <div>
-                <a href="{{ route('blogs.index') }}" class="btn btn-dark text-uppercase"><b>Back</b></a>
+                <a href="{{ route('blogs.index') }}" class="btn btn-dark text-uppercase fw-bold"><i class="fa-solid fa-angle-left"></i> Back</a>
             </div>
         </div>
         <div class="row">
@@ -20,6 +19,5 @@
             @endif
             <p class="mt-3 fs-5">{!! $blog->description !!}</p>
         </div>
-
     </div>
 @endsection

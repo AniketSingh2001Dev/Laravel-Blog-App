@@ -5,7 +5,7 @@
         <div class="d-flex justify-content-between pt-5 mb-4">
             <h3 class="fs-2"><b>Create Blog</b></h3>
             <div>
-                <a href="{{ route('blogs.index') }}" class="btn btn-dark text-uppercase"><b>Back</b></a>
+                <a href="{{ route('blogs.index') }}" class="btn btn-dark text-uppercase fw-bold"><i class="fa-solid fa-angle-left"></i> Back</a>
             </div>
         </div>
         <div class="card border-0 shadow-lg">
@@ -38,7 +38,7 @@
                         <input type="text" name="author" id="author" class="form-control" placeholder="Author">
                         <p></p>
                     </div>
-                    <button type="submit" class="btn btn-dark text-uppercase"><b>Create</b></button>
+                    <button type="submit" class="btn btn-dark text-uppercase fw-bold"><i class="fa-solid fa-plus"></i> Create</button>
                 </div>
             </form>
         </div>
